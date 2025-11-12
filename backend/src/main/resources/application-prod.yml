@@ -36,5 +36,8 @@ logging:
 sentry:
   enabled: true
   environment: production
-  traces-sample-rate: 0.25  # Sample 25% of transactions in prod to reduce quota usage
+  traces-sample-rate: 0.25 # Sample 25% of transactions in prod to reduce quota usage
 
+# OAuth2 Configuration for Production
+oauth2:
+  enabled: ${OAUTH2_ENABLED:true}

@@ -11,6 +11,10 @@ spring:
     openai:
       enabled: false
       api-key: test-disabled
+  # Disable OAuth2 auto-configuration for tests
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration
 
 recaptcha:
   enabled: false

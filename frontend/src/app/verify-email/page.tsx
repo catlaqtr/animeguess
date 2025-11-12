@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { isAxiosError } from 'axios';
@@ -10,7 +10,7 @@ type Status = 'loading' | 'success' | 'error' | 'missing';
 
 export const dynamic = 'force-dynamic';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [status, setStatus] = useState<Status>('loading');
@@ -120,5 +120,23 @@ export default function VerifyEmailPage() {
         )}
       </motion.div>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
+          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur">
+            <div className="text-5xl">⌛</div>
+            <h1 className="mt-4 text-2xl font-bold">Verifying...</h1>
+            <p className="mt-3 text-sm text-slate-200">Please wait while we verify your email.</p>
+          </div>
+        </div>
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

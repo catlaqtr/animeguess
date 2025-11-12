@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { handleAuthResponse } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
-export default function OAuthCallbackPage() {
+function OAuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const hasHandledRef = useRef(false);
@@ -51,5 +51,22 @@ export default function OAuthCallbackPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function OAuthCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-purple-100 via-white to-pink-100 p-6 text-center">
+          <div className="w-full max-w-md rounded-3xl bg-white/80 p-10 shadow-xl backdrop-blur-md">
+            <h1 className="mb-4 text-3xl font-bold text-purple-700">Loading…</h1>
+            <p className="text-gray-600">Preparing your sign-in...</p>
+          </div>
+        </div>
+      }
+    >
+      <OAuthCallbackContent />
+    </Suspense>
   );
 }
