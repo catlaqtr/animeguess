@@ -1,0 +1,114 @@
+spring:
+  config:
+    import:
+      - "optional:file:.env.properties"
+      - "optional:file:.env.${spring.profiles.active}.properties"
+
+  application:
+    name: anime-guess-game
+
+  profiles:
+    active: dev
+
+  # JPA/Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: validate # Flyway handles schema
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  # AI Configuration
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-3.5-turbo
+          temperature: 0.7
+
+  # OAuth2 Client Configuration
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:}
+            client-secret: ${GOOGLE_CLIENT_SECRET:}
+            scope: openid,profile,email
+
+# SendGrid Email Configuration
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:}
+  from-email: ${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}
+  from-name: ${SENDGRID_FROM_NAME:Anime Guess Game}
+  enabled: ${SENDGRID_ENABLED:false}
+
+# Security
+jwt:
+  secret: ${JWT_SECRET:your-secret-key-change-this-in-production-make-it-very-long-and-secure}
+  expiration: 86400000 # 24 hours in milliseconds
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Bucket4j Rate Limiting
+bucket4j:
+  enabled: true
+
+# reCAPTCHA Configuration
+recaptcha:
+  secret-key: ${RECAPTCHA_SECRET_KEY:}
+  enabled: ${RECAPTCHA_ENABLED:false}
+  threshold: 0.5 # Score threshold (0.0 - 1.0)
+
+# Sentry Error Monitoring
+sentry:
+  dsn: ${SENTRY_DSN:}
+  enabled: ${SENTRY_ENABLED:false}
+  environment: ${SENTRY_ENVIRONMENT:${SPRING_PROFILES_ACTIVE:dev}}
+  release: ${SENTRY_RELEASE:}
+  traces-sample-rate: 1.0 # 100% of transactions for performance monitoring
+  send-default-pii: false # Don't send personally identifiable information
+  logging:
+    minimum-event-level: error # Only send ERROR and above to Sentry
+    minimum-breadcrumb-level: info # Capture INFO breadcrumbs for context
+
+# Logging
+logging:
+  level:
+    com.anime.guessgame: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+
+oauth2:
+  enabled: ${OAUTH2_ENABLED:true}

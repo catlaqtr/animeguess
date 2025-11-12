@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/animeguess}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+
+  # AI Configuration for Development
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+
+  # Disable OAuth2 auto-configuration (override when enabling OAuth locally)
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration
+
+# JWT Configuration for Development
+jwt:
+  secret: ${JWT_SECRET:change-me-locally-and-keep-private}
+
+# OAuth2 Configuration (optional)
+# To enable Google login:
+# 1. Set oauth2.enabled=true (see below)
+# 2. Provide GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET values
+oauth2:
+  enabled: ${OAUTH2_ENABLED:false}
+
+# CORS for local development
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
+  allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST,PUT,DELETE,OPTIONS}
+  allowed-headers: ${CORS_ALLOWED_HEADERS:*}
+  allow-credentials: true
+
+# SendGrid Configuration for Development (disabled by default)
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:}
+  from-email: ${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}
+  from-name: ${SENDGRID_FROM_NAME:Anime Guess Game}
+  enabled: ${SENDGRID_ENABLED:false}
+
+# Sentry for development (typically disabled)
+sentry:
+  enabled: ${SENTRY_ENABLED:false}
+  environment: ${SENTRY_ENVIRONMENT:development}
+  traces-sample-rate: ${SENTRY_TRACES_SAMPLE_RATE:1.0}
+  debug: ${SENTRY_DEBUG:false}
+
+# reCAPTCHA configuration for development
+recaptcha:
+  secret-key: ${RECAPTCHA_SECRET_KEY:}
+  enabled: ${RECAPTCHA_ENABLED:false}
+  threshold: ${RECAPTCHA_THRESHOLD:0.5} # Score threshold (0.0 - 1.0)

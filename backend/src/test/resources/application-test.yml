@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+  ai:
+    openai:
+      enabled: false
+      api-key: test-disabled
+
+recaptcha:
+  enabled: false
+
+sendgrid:
+  enabled: false
+
+sentry:
+  enabled: false
+
+oauth2:
+  enabled: false
+
+logging:
+  level:
+    root: WARN
+    com.anime.guessgame: INFO
+
+cors:
+  allowed-origins: http://localhost:3000
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: false

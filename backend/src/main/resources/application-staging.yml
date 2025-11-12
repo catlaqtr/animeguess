@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: ${STAGING_DATABASE_URL:${DATABASE_URL}}
+    username: ${STAGING_DATABASE_USERNAME:${DATABASE_USERNAME}}
+    password: ${STAGING_DATABASE_PASSWORD:${DATABASE_PASSWORD}}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: false
+
+  flyway:
+    enabled: true
+
+cors:
+  allowed-origins: ${STAGING_FRONTEND_URL:${FRONTEND_URL:https://staging.your-frontend.example}}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+sendgrid:
+  api-key: ${STAGING_SENDGRID_API_KEY:${SENDGRID_API_KEY:}}
+  from-email: ${STAGING_SENDGRID_FROM_EMAIL:${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}}
+  from-name: ${STAGING_SENDGRID_FROM_NAME:${SENDGRID_FROM_NAME:Anime Guess Game}}
+  enabled: ${STAGING_SENDGRID_ENABLED:true}
+
+logging:
+  level:
+    com.anime.guessgame: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: WARN
+
+sentry:
+  enabled: true
+  environment: staging
+  traces-sample-rate: 0.5

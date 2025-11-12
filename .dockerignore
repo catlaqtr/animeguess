@@ -1,0 +1,35 @@
+# Common
+.git
+.gitignore
+README.md
+*.md
+.env
+.env.local
+.env*.local
+
+# Backend
+backend/target
+backend/.mvn
+backend/logs
+backend/*.log
+
+# Frontend
+frontend/node_modules
+frontend/.next
+frontend/out
+frontend/.vercel
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDE
+.idea
+.vscode
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

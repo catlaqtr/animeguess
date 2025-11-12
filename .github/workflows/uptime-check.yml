@@ -1,0 +1,42 @@
+name: Uptime Check
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FRONTEND_URL: ${{ secrets.UPTIME_FRONTEND_URL }}
+      BACKEND_URL: ${{ secrets.UPTIME_BACKEND_URL }}
+    steps:
+      - name: Check frontend availability
+        run: |
+          if [ -z "${FRONTEND_URL}" ]; then
+            echo "Frontend URL not configured. Set the UPTIME_FRONTEND_URL secret to enable this check."
+            exit 0
+          fi
+
+          status=$(curl -s -o /dev/null -w "%{http_code}" "${FRONTEND_URL}")
+          if [ "${status}" -ge 400 ] || [ "${status}" -lt 200 ]; then
+            echo "::error::Frontend check failed with status ${status} for ${FRONTEND_URL}"
+            exit 1
+          fi
+          echo "Frontend healthy (${status})."
+
+      - name: Check backend health endpoint
+        run: |
+          if [ -z "${BACKEND_URL}" ]; then
+            echo "Backend URL not configured. Set the UPTIME_BACKEND_URL secret to enable this check."
+            exit 0
+          fi
+
+          status=$(curl -s -o /dev/null -w "%{http_code}" "${BACKEND_URL}")
+          if [ "${status}" -ge 400 ] || [ "${status}" -lt 200 ]; then
+            echo "::error::Backend check failed with status ${status} for ${BACKEND_URL}"
+            exit 1
+          fi
+          echo "Backend healthy (${status})."
