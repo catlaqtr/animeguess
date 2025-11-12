@@ -33,6 +33,9 @@ jobs:
 
       - name: Run tests
         working-directory: ./backend
+        env:
+          DOCKER_HOST: tcp://docker:2375
+          TESTCONTAINERS_RYUK_DISABLED: true
         run: mvn -B clean verify
 
       - name: Run Checkstyle

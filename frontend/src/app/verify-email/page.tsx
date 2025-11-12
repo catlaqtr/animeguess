@@ -8,6 +8,8 @@ import { authAPI } from '@/lib/api';
 
 type Status = 'loading' | 'success' | 'error' | 'missing';
 
+export const dynamic = 'force-dynamic';
+
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams();
   const router = useRouter();

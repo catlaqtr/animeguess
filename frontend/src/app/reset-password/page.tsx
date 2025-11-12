@@ -10,6 +10,8 @@ import { ResetPasswordFormData, resetPasswordSchema } from '@/lib/validations';
 import { useResetPassword } from '@/lib/hooks/useAuth';
 import { authAPI } from '@/lib/api';
 
+export const dynamic = 'force-dynamic';
+
 export default function ResetPasswordPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
