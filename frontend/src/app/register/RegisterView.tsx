@@ -113,7 +113,9 @@ export default function RegisterView() {
         >
           🎌 JOIN THE GAME
         </motion.h1>
-        <p className="mb-8 text-center font-semibold text-gray-700">Become a legendary player! 🏆</p>
+        <p className="mb-8 text-center font-semibold text-gray-700">
+          Become a legendary player! 🏆
+        </p>
 
         {successMessage && (
           <motion.div
@@ -191,7 +193,10 @@ export default function RegisterView() {
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="mb-2 block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="confirmPassword"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               Confirm Password
             </label>
             <input
@@ -270,4 +275,3 @@ export default function RegisterView() {
     </div>
   );
 }
-

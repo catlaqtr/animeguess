@@ -1,21 +1,20 @@
 # Multi-stage build for Spring Boot backend
 
 # Stage 1: Build
-FROM eclipse-temurin:17-jdk-alpine AS builder
+FROM maven:3.9-eclipse-temurin-17-alpine AS builder
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+# Copy pom.xml first for better caching
+COPY pom.xml ./
 
 # Download dependencies (cached layer)
-RUN ./mvnw dependency:go-offline
+RUN mvn dependency:go-offline -B
 
 # Copy source code
 COPY src ./src
 
 # Build application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests -B
 
 # Stage 2: Runtime
 FROM eclipse-temurin:17-jre-alpine

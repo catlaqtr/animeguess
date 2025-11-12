@@ -74,9 +74,7 @@ export default function HistoryPage() {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">
-                        {game.status === 'WON' ? '🎉' : '😢'}
-                      </span>
+                      <span className="text-3xl">{game.status === 'WON' ? '🎉' : '😢'}</span>
                       <div>
                         <h3 className="text-xl font-bold">
                           {game.status === 'WON' ? 'Victory!' : 'Better luck next time'}
@@ -129,4 +127,3 @@ export default function HistoryPage() {
     </div>
   );
 }
-
