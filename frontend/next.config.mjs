@@ -81,6 +81,7 @@ const isSentryUploadConfigured =
   Boolean(process.env.SENTRY_ORG) &&
   Boolean(process.env.SENTRY_PROJECT);
 
+// Build Sentry options conditionally
 const sentryWebpackPluginOptions = {
   silent: true,
   org: process.env.SENTRY_ORG,
@@ -89,9 +90,11 @@ const sentryWebpackPluginOptions = {
   hideSourceMaps: true,
   release:
     process.env.SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA,
-  // Disable setCommits - it requires git history which isn't available in Vercel builds
-  // You can manually associate commits in Sentry dashboard if needed
-  setCommits: false,
+  // Explicitly disable setCommits - do not associate commits during build
+  // Vercel builds don't have full git history available
+  setCommits: {
+    auto: false,
+  },
   dryRun: !isSentryUploadConfigured,
 };
 
