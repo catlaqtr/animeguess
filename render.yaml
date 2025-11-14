@@ -66,9 +66,13 @@ services:
       - key: SENTRY_DSN
         sync: false
 
-      # Frontend URL for CORS (update after deploying frontend to Vercel)
+      # Frontend URL for CORS (comma-separated for multiple domains)
       - key: FRONTEND_URL
-        value: https://animeguess-ecru.vercel.app
+        value: https://animeguess.ca,https://www.animeguess.ca
+      
+      # Primary frontend URL for OAuth2 redirects and email links (single domain)
+      - key: APP_FRONTEND_URL
+        value: https://animeguess.ca
 
 databases:
   # PostgreSQL Database

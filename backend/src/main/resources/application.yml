@@ -108,7 +108,7 @@ springdoc:
     operationsSorter: method
 
 app:
-  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+  frontend-url: ${APP_FRONTEND_URL:${FRONTEND_URL:http://localhost:3000}}
 
 oauth2:
   enabled: ${OAUTH2_ENABLED:true}
