@@ -44,3 +44,9 @@ sentry:
 # OAuth2 Configuration for Production
 oauth2:
   enabled: ${OAUTH2_ENABLED:true}
+
+# reCAPTCHA Configuration for Production
+recaptcha:
+  secret-key: ${RECAPTCHA_SECRET_KEY:}
+  enabled: ${RECAPTCHA_ENABLED:true}
+  threshold: ${RECAPTCHA_THRESHOLD:0.5}

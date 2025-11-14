@@ -32,7 +32,16 @@ export default function RegisterView() {
       return undefined;
     }
 
-    return error.response?.data?.message;
+    const errorData = error.response?.data;
+    
+    // Handle validation errors (returns { errors: { field: message } })
+    if (errorData?.errors && typeof errorData.errors === 'object') {
+      const errorMessages = Object.values(errorData.errors) as string[];
+      return errorMessages.join(', ') || 'Validation failed. Please check your input.';
+    }
+    
+    // Handle regular error messages
+    return errorData?.message || 'Registration failed. Please try again.';
   }, [error]);
 
   const onSubmit = async (data: RegisterFormData) => {
