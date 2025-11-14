@@ -52,17 +52,45 @@ public class DataSourceConfig implements ApplicationListener<ApplicationEnvironm
                         String jdbcUrl = String.format("jdbc:postgresql://%s:%d/%s", host, port, dbName);
                         
                         Map<String, Object> properties = new HashMap<>();
+                        // Set DataSource properties
                         properties.put("spring.datasource.url", jdbcUrl);
                         properties.put("spring.datasource.username", username);
                         properties.put("spring.datasource.password", password);
                         
+                        // Also set Flyway properties to use the converted JDBC URL
+                        properties.put("spring.flyway.url", jdbcUrl);
+                        properties.put("spring.flyway.user", username);
+                        properties.put("spring.flyway.password", password);
+                        
                         environment.getPropertySources().addFirst(
                             new MapPropertySource("databaseUrlConversion", properties)
                         );
+                    } else {
+                        // If no userInfo, try to use DATABASE_USERNAME and DATABASE_PASSWORD
+                        String username = environment.getProperty("DATABASE_USERNAME", "");
+                        String password = environment.getProperty("DATABASE_PASSWORD", "");
+                        
+                        if (!username.isEmpty() && !password.isEmpty()) {
+                            String jdbcUrl = String.format("jdbc:postgresql://%s:%d/%s", host, port, dbName);
+                            
+                            Map<String, Object> properties = new HashMap<>();
+                            properties.put("spring.datasource.url", jdbcUrl);
+                            properties.put("spring.datasource.username", username);
+                            properties.put("spring.datasource.password", password);
+                            properties.put("spring.flyway.url", jdbcUrl);
+                            properties.put("spring.flyway.user", username);
+                            properties.put("spring.flyway.password", password);
+                            
+                            environment.getPropertySources().addFirst(
+                                new MapPropertySource("databaseUrlConversion", properties)
+                            );
+                        }
                     }
                 } catch (Exception e) {
                     // If parsing fails, log and continue with original values
                     System.err.println("Failed to parse DATABASE_URL: " + e.getMessage());
+                    System.err.println("DATABASE_URL value: " + databaseUrl);
+                    e.printStackTrace();
                 }
             }
             // If already in jdbc: format, no conversion needed
