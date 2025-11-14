@@ -1,0 +1,81 @@
+services:
+  # Backend Service (Spring Boot)
+  - type: web
+    name: anime-guess-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: starter # Change to 'standard' or 'pro' for production
+    region: oregon # Change to your preferred region
+    branch: main
+    healthCheckPath: /actuator/health
+    envVars:
+      # Spring Profile
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+
+      # Database Configuration
+      # Render automatically provides these when you link a PostgreSQL database
+      # The connectionString is in format: postgresql://user:pass@host:port/dbname
+      # Our DataSourceConfig will convert it to JDBC format automatically
+      - key: DATABASE_URL
+        fromDatabase:
+          name: anime-guess-db
+          property: connectionString
+
+      # These are provided separately by Render
+      - key: DATABASE_USERNAME
+        fromDatabase:
+          name: anime-guess-db
+          property: user
+
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: anime-guess-db
+          property: password
+
+      # JWT Secret (set this in Render dashboard)
+      - key: JWT_SECRET
+        generateValue: true
+        sync: false
+
+      # OpenAI API Key (set this in Render dashboard)
+      - key: OPENAI_API_KEY
+        sync: false
+
+      # SendGrid Configuration (set these in Render dashboard)
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SENDGRID_FROM_EMAIL
+        value: meteunal46@hotmail.com
+      - key: SENDGRID_FROM_NAME
+        value: Anime Guess Game
+
+      # OAuth2 Configuration (set these in Render dashboard)
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+
+      # reCAPTCHA Configuration (set these in Render dashboard)
+      - key: RECAPTCHA_SECRET_KEY
+        sync: false
+      - key: RECAPTCHA_ENABLED
+        value: "true"
+
+      # Sentry Configuration (set these in Render dashboard)
+      - key: SENTRY_DSN
+        sync: false
+
+      # Frontend URL for CORS (update after deploying frontend to Vercel)
+      - key: FRONTEND_URL
+        value: https://your-frontend.vercel.app # Update this after Vercel deployment
+
+databases:
+  # PostgreSQL Database
+  - name: anime-guess-db
+    databaseName: anime_guess_game
+    user: anime_guess_user
+    plan: starter # Change to 'standard' or 'pro' for production
+    region: oregon # Should match the service region
+
