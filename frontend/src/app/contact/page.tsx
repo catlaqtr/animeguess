@@ -127,9 +127,7 @@ export default function ContactPage() {
               placeholder="Your name"
               disabled={isSubmitting}
             />
-            {errors.name && (
-              <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
           </div>
           <div className="sm:col-span-1">
             <label className="block text-xs font-semibold uppercase tracking-wide text-slate-600">
@@ -148,9 +146,7 @@ export default function ContactPage() {
               placeholder="you@example.com"
               disabled={isSubmitting}
             />
-            {errors.email && (
-              <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
-            )}
+            {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
           </div>
           <div className="sm:col-span-2">
             <label className="block text-xs font-semibold uppercase tracking-wide text-slate-600">
