@@ -16,7 +16,7 @@ const contentSecurityPolicy = `
   frame-ancestors 'none';
   object-src 'none';
   base-uri 'self';
-  form-action 'self';
+  form-action 'self' https://formsubmit.co;
   worker-src 'self' blob:;
 `;
 
