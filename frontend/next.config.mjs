@@ -92,6 +92,12 @@ const sentryWebpackPluginOptions = {
   setCommits: {
     auto: true,
     ignoreMissing: true,
+    ignoreEmpty: true, // Allow empty commit sets without failing
+  },
+  // Don't fail the build on Sentry errors
+  errorHandler: (err, invokeErr, compilation) => {
+    console.warn('Sentry Webpack Plugin Warning:', err.message);
+    // Continue build even if Sentry has issues
   },
   dryRun: !isSentryUploadConfigured,
 };

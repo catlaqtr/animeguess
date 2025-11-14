@@ -31,15 +31,20 @@ public class DataSourceConfig implements ApplicationListener<ApplicationEnvironm
         ConfigurableEnvironment environment = event.getEnvironment();
         String databaseUrl = environment.getProperty("DATABASE_URL");
         
+        System.out.println("DataSourceConfig: DATABASE_URL = " + (databaseUrl != null ? databaseUrl.replaceAll(":[^:@]+@", ":****@") : "null"));
+        
         if (databaseUrl != null && !databaseUrl.isEmpty()) {
             // Check if it's in postgresql:// format (Render format)
             if (databaseUrl.startsWith("postgresql://") || databaseUrl.startsWith("postgres://")) {
+                System.out.println("DataSourceConfig: Detected postgresql:// format, converting...");
                 try {
                     URI uri = new URI(databaseUrl);
                     String host = uri.getHost();
                     int port = uri.getPort() == -1 ? 5432 : uri.getPort();
                     String path = uri.getPath();
                     String dbName = path.startsWith("/") ? path.substring(1) : path;
+                    
+                    System.out.println("DataSourceConfig: Parsed - host=" + host + ", port=" + port + ", dbName=" + dbName);
                     
                     // Extract username and password from userInfo
                     String userInfo = uri.getUserInfo();
@@ -62,9 +67,17 @@ public class DataSourceConfig implements ApplicationListener<ApplicationEnvironm
                         properties.put("spring.flyway.user", username);
                         properties.put("spring.flyway.password", password);
                         
+                        System.out.println("DataSourceConfig: Converted JDBC URL = " + jdbcUrl.replaceAll(":[^:@]+@", ":****@"));
+                        System.out.println("DataSourceConfig: Setting properties for DataSource and Flyway");
+                        
+                        // Also override DATABASE_URL to prevent any direct reads
+                        properties.put("DATABASE_URL", jdbcUrl);
+                        
                         environment.getPropertySources().addFirst(
                             new MapPropertySource("databaseUrlConversion", properties)
                         );
+                        
+                        System.out.println("DataSourceConfig: Conversion completed successfully");
                     } else {
                         // If no userInfo, try to use DATABASE_USERNAME and DATABASE_PASSWORD
                         String username = environment.getProperty("DATABASE_USERNAME", "");
