@@ -47,9 +47,14 @@ public class CorsConfig {
         }
         
         configuration.setAllowCredentials(allowCredentials);
+        configuration.setMaxAge(3600L); // Cache preflight requests for 1 hour
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+        
+        System.out.println("CORS Configuration - Methods: " + methods);
+        System.out.println("CORS Configuration - Headers: " + allowedHeaders);
+        System.out.println("CORS Configuration - Allow Credentials: " + allowCredentials);
         
         return source;
     }
