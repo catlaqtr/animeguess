@@ -68,7 +68,7 @@ services:
 
       # Frontend URL for CORS (update after deploying frontend to Vercel)
       - key: FRONTEND_URL
-        value: https://your-frontend.vercel.app # Update this after Vercel deployment
+        value: https://animeguess-ecru.vercel.app
 
 databases:
   # PostgreSQL Database
