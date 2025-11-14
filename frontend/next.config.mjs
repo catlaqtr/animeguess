@@ -89,16 +89,9 @@ const sentryWebpackPluginOptions = {
   hideSourceMaps: true,
   release:
     process.env.SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA,
-  setCommits: {
-    auto: true,
-    ignoreMissing: true,
-    ignoreEmpty: true, // Allow empty commit sets without failing
-  },
-  // Don't fail the build on Sentry errors
-  errorHandler: (err, invokeErr, compilation) => {
-    console.warn('Sentry Webpack Plugin Warning:', err.message);
-    // Continue build even if Sentry has issues
-  },
+  // Disable setCommits - it requires git history which isn't available in Vercel builds
+  // You can manually associate commits in Sentry dashboard if needed
+  setCommits: false,
   dryRun: !isSentryUploadConfigured,
 };
 
