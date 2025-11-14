@@ -29,14 +29,20 @@
     </appender>
 
     <!-- Root Logger -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-        <!-- File appender disabled in production (cloud environments) -->
-        <springProfile name="!prod">
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="SENTRY" />
+        </root>
+    </springProfile>
+    
+    <springProfile name="!prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />
-        </springProfile>
-        <appender-ref ref="SENTRY" />
-    </root>
+            <appender-ref ref="SENTRY" />
+        </root>
+    </springProfile>
 
     <!-- Application Loggers -->
     <logger name="com.anime.guessgame" level="DEBUG" />
