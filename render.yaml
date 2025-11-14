@@ -5,7 +5,7 @@ services:
     env: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
-    plan: starter # Change to 'standard' or 'pro' for production
+    plan: free # Free tier - services spin down after 15 min inactivity
     region: oregon # Change to your preferred region
     branch: main
     healthCheckPath: /actuator/health
@@ -75,6 +75,6 @@ databases:
   - name: anime-guess-db
     databaseName: anime_guess_game
     user: anime_guess_user
-    plan: starter # Change to 'standard' or 'pro' for production
+    plan: free # Free tier - 90 day trial, then $7/month
     region: oregon # Should match the service region
 
