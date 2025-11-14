@@ -43,7 +43,7 @@ public class AuthController {
         boolean isHuman = recaptchaService.verify(request.getRecaptchaToken(), "register");
 
         if (!isHuman) {
-            throw new BadRequestException("reCAPTCHA verification failed. Please try again.");
+            throw new BadRequestException("reCAPTCHA verification failed. Please refresh the page and try again.");
         }
 
         RegisterRequest registerRequest = new RegisterRequest(

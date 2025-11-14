@@ -50,6 +50,12 @@ public class RecaptchaService {
             return true;
         }
 
+        // Validate secret key is configured when reCAPTCHA is enabled
+        if (secretKey == null || secretKey.isEmpty() || secretKey.trim().isEmpty()) {
+            logger.error("reCAPTCHA is enabled but secret key is not configured. Please set RECAPTCHA_SECRET_KEY environment variable.");
+            return false;
+        }
+
         if (token == null || token.isEmpty()) {
             logger.warn("reCAPTCHA token is missing");
             return false;
@@ -79,7 +85,13 @@ public class RecaptchaService {
 
             // Check success, score threshold, and action match
             if (!success) {
-                logger.warn("reCAPTCHA verification failed: success=false. Response: {}", response);
+                // Log error codes if present for better debugging
+                if (jsonNode.has("error-codes")) {
+                    logger.warn("reCAPTCHA verification failed: success=false. Error codes: {}. Response: {}", 
+                               jsonNode.get("error-codes").toString(), response);
+                } else {
+                    logger.warn("reCAPTCHA verification failed: success=false. Response: {}", response);
+                }
                 return false;
             }
             if (score < threshold) {
@@ -96,7 +108,7 @@ public class RecaptchaService {
             return true;
 
         } catch (Exception e) {
-            logger.error("reCAPTCHA verification failed", e);
+            logger.error("reCAPTCHA verification failed with exception: {}", e.getMessage(), e);
             return false;
         }
     }
