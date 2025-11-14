@@ -81,21 +81,31 @@ const isSentryUploadConfigured =
   Boolean(process.env.SENTRY_ORG) &&
   Boolean(process.env.SENTRY_PROJECT);
 
-// Build Sentry options conditionally
-const sentryWebpackPluginOptions = {
-  silent: true,
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  hideSourceMaps: true,
-  release:
-    process.env.SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA,
-  // Explicitly disable setCommits - do not associate commits during build
-  // Vercel builds don't have full git history available
-  setCommits: {
-    auto: false,
-  },
-  dryRun: !isSentryUploadConfigured,
-};
+// Temporarily disable Sentry source map uploads during build to avoid setCommits errors
+// Error tracking will still work at runtime via NEXT_PUBLIC_SENTRY_DSN
+// You can manually upload source maps later if needed
+const DISABLE_SENTRY_BUILD = process.env.DISABLE_SENTRY_BUILD === 'true' || true; // Set to false to enable
 
-export default withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+let finalConfig = nextConfig;
+
+if (isSentryUploadConfigured && !DISABLE_SENTRY_BUILD) {
+  const sentryWebpackPluginOptions = {
+    silent: true,
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    hideSourceMaps: true,
+    release:
+      process.env.SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA,
+    setCommits: undefined,
+    dryRun: false,
+  };
+
+  finalConfig = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+} else if (isSentryUploadConfigured) {
+  // Sentry is configured but build uploads are disabled
+  // Runtime error tracking will still work via NEXT_PUBLIC_SENTRY_DSN
+  console.log('Sentry build-time source map uploads disabled to avoid setCommits errors');
+}
+
+export default finalConfig;
