@@ -34,9 +34,8 @@ services:
           name: anime-guess-db
           property: password
 
-      # JWT Secret (set this in Render dashboard)
+      # JWT Secret (set this in Render dashboard - generate a secure random string)
       - key: JWT_SECRET
-        generateValue: true
         sync: false
 
       # OpenAI API Key (set this in Render dashboard)
