@@ -74,11 +74,26 @@ public class RecaptchaService {
             double score = jsonNode.has("score") ? jsonNode.get("score").asDouble() : 0.0;
             String responseAction = jsonNode.has("action") ? jsonNode.get("action").asText() : "";
 
-            logger.info("reCAPTCHA verification - Success: {}, Score: {}, Action: {}", 
-                       success, score, responseAction);
+            logger.info("reCAPTCHA verification - Success: {}, Score: {}, Action: {}, Expected Action: {}", 
+                       success, score, responseAction, action);
 
             // Check success, score threshold, and action match
-            return success && score >= threshold && action.equals(responseAction);
+            if (!success) {
+                logger.warn("reCAPTCHA verification failed: success=false. Response: {}", response);
+                return false;
+            }
+            if (score < threshold) {
+                logger.warn("reCAPTCHA verification failed: score {} is below threshold {}. Response: {}", 
+                           score, threshold, response);
+                return false;
+            }
+            if (!action.equals(responseAction)) {
+                logger.warn("reCAPTCHA verification failed: action mismatch. Expected: {}, Got: {}. Response: {}", 
+                           action, responseAction, response);
+                return false;
+            }
+            
+            return true;
 
         } catch (Exception e) {
             logger.error("reCAPTCHA verification failed", e);
