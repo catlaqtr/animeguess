@@ -8,17 +8,19 @@
         </encoder>
     </appender>
 
-    <!-- File Appender -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/anime-guess-game.log</file>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/anime-guess-game.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-    </appender>
+    <!-- File Appender (only for non-production environments) -->
+    <springProfile name="!prod">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/anime-guess-game.log</file>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/anime-guess-game.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+    </springProfile>
 
     <!-- Sentry Appender -->
     <appender name="SENTRY" class="io.sentry.logback.SentryAppender">
@@ -29,7 +31,10 @@
     <!-- Root Logger -->
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+        <!-- File appender disabled in production (cloud environments) -->
+        <springProfile name="!prod">
+            <appender-ref ref="FILE" />
+        </springProfile>
         <appender-ref ref="SENTRY" />
     </root>
 
