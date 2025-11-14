@@ -147,6 +147,20 @@ export const authAPI = {
   },
 };
 
+// Contact API
+export interface ContactRequest {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export const contactAPI = {
+  submitContact: async (data: ContactRequest): Promise<MessageResponse> => {
+    const response = await api.post<MessageResponse>('/contact', data);
+    return response.data;
+  },
+};
+
 // Game API
 export const gameAPI = {
   startGame: async (): Promise<GameResponse> => {

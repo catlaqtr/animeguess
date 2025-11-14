@@ -83,6 +83,17 @@ public class EmailService {
     }
 
     /**
+     * Send contact form submission email
+     */
+    public void sendContactEmail(String fromName, String fromEmail, String message) {
+        String subject = "New Contact Form Submission - Anime Guess Game";
+        String htmlContent = buildContactEmailHtml(fromName, fromEmail, message);
+        
+        // Send to the configured from-email (your email where you receive contacts)
+        sendEmail(this.fromEmail, subject, htmlContent);
+    }
+
+    /**
      * Generic email sending method
      */
     private void sendEmail(String toEmail, String subject, String htmlContent) {
@@ -250,6 +261,50 @@ public class EmailService {
             </body>
             </html>
             """, username, achievement);
+    }
+
+    private String buildContactEmailHtml(String fromName, String fromEmail, String message) {
+        return String.format("""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background: linear-gradient(135deg, #667eea 0%%, #764ba2 100%%); 
+                              color: white; padding: 30px; text-align: center; border-radius: 10px; }
+                    .content { padding: 30px; background: #f9f9f9; border-radius: 10px; margin-top: 20px; }
+                    .info { background: white; padding: 15px; border-radius: 5px; margin: 15px 0; }
+                    .info-label { font-weight: bold; color: #667eea; }
+                    .message-box { background: white; padding: 20px; border-radius: 5px; border-left: 4px solid #667eea; margin-top: 15px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>📧 New Contact Form Submission</h1>
+                    </div>
+                    <div class="content">
+                        <p>You have received a new message from your Anime Guess Game contact form:</p>
+                        
+                        <div class="info">
+                            <p><span class="info-label">Name:</span> %s</p>
+                            <p><span class="info-label">Email:</span> <a href="mailto:%s">%s</a></p>
+                        </div>
+                        
+                        <div class="message-box">
+                            <p><span class="info-label">Message:</span></p>
+                            <p>%s</p>
+                        </div>
+                        
+                        <p style="margin-top: 30px; color: #666; font-size: 12px;">
+                            This email was sent from the contact form on Anime Guess Game.
+                        </p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            """, fromName, fromEmail, fromEmail, message.replace("\n", "<br>"));
     }
 }
 

@@ -75,6 +75,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/contact").permitAll()  // Contact form endpoint
                         .requestMatchers("/login/oauth2/**", "/oauth2/**").permitAll()  // OAuth2 endpoints
                         .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
