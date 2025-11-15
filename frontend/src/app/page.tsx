@@ -28,12 +28,13 @@ export default function HomePage() {
             🎌 Play • Learn • Guess
           </span>
           <h1 className="text-4xl font-black tracking-tight text-slate-900 sm:text-6xl">
-            Guess the anime character using clever questions.
+            Free Anime Character Guessing Game - Test Your Anime Knowledge
           </h1>
           <p className="max-w-3xl text-lg text-slate-600 sm:text-xl">
-            Anime Guess Game is an interactive challenge powered by AI. Ask strategic questions,
-            narrow down the possibilities, and see how fast you can reveal the secret character.
-            Perfect for anime fans and trivia lovers alike.
+            Play the best free anime character guessing game online! Ask strategic questions about
+            characters from Naruto, One Piece, Dragon Ball, and more. Our AI-powered game provides
+            accurate clues to help you guess the secret anime character. Perfect for anime fans and
+            trivia lovers - completely free to play!
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -57,9 +58,9 @@ export default function HomePage() {
           </div>
           <dl className="grid w-full grid-cols-1 gap-6 rounded-3xl border border-slate-200 bg-white/90 p-6 text-left shadow-lg sm:grid-cols-3">
             {[
-              { title: '50+', subtitle: 'Iconic characters' },
+              { title: '50+', subtitle: 'Anime characters from popular series' },
               { title: 'AI-powered clues', subtitle: 'Accurate, lore-friendly answers' },
-              { title: 'Global leaderboard', subtitle: 'Track your winning streak' },
+              { title: 'Free to play', subtitle: 'No download, no credit card required' },
             ].map((item) => (
               <div key={item.title}>
                 <dt className="text-sm text-slate-500">{item.subtitle}</dt>
@@ -120,6 +121,48 @@ export default function HomePage() {
               ✅ Powered by Spring Boot, Next.js, and secured with Cloudflare + Sentry.
             </li>
           </ul>
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-4xl px-4">
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-8">
+            Frequently Asked Questions
+          </h2>
+          <dl className="space-y-6">
+            {[
+              {
+                question: 'How do you play Anime Guess Game?',
+                answer:
+                  'Anime Guess Game is a free online guessing game where you ask questions to identify a secret anime character. Ask yes/no or descriptive questions, get AI-powered clues, and make your guess to win!',
+              },
+              {
+                question: 'Is Anime Guess Game free to play?',
+                answer:
+                  'Yes! Anime Guess Game is completely free to play. Create a free account to track your progress and compete on the leaderboard. No credit card required.',
+              },
+              {
+                question: 'What anime characters are in the game?',
+                answer:
+                  'Anime Guess Game features 50+ iconic characters from popular anime series including Naruto, One Piece, Dragon Ball, Attack on Titan, My Hero Academia, and many more. New characters are added regularly.',
+              },
+              {
+                question: 'Do I need to download anything to play?',
+                answer:
+                  'No download required! Anime Guess Game is a browser-based game that works on any device with an internet connection. Play instantly from your computer, tablet, or phone.',
+              },
+              {
+                question: 'How does the AI provide clues?',
+                answer:
+                  "Our AI analyzes your questions and provides accurate, lore-friendly answers based on the character's canonical information. The AI stays true to the source material to give you authentic clues.",
+              },
+            ].map((faq, index) => (
+              <div key={index} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <dt className="text-lg font-semibold text-slate-900 mb-2">{faq.question}</dt>
+                <dd className="text-slate-600">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

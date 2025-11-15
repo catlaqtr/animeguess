@@ -2,9 +2,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About Anime Guess Game - How It Works & Our Mission',
   description:
-    'Learn about Anime Guess Game, the team behind it, and our mission to create a fun, secure trivia experience for anime fans.',
+    'Learn about Anime Guess Game, how to play the free anime character guessing game, and our mission to create the best anime trivia experience. Built by anime fans for anime fans.',
+  keywords: [
+    'about anime guess game',
+    'how anime guessing game works',
+    'anime game mission',
+    'anime trivia game about',
+  ],
 };
 
 export default function AboutPage() {

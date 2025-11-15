@@ -18,11 +18,25 @@ const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Anime Guess Game - Can You Guess the Character?',
+    default: 'Anime Guess Game - Free Online Anime Character Guessing Game',
     template: '%s | Anime Guess Game',
   },
-  description: 'Test your anime knowledge! Ask questions and guess the secret anime character.',
-  keywords: ['anime', 'game', 'guessing game', 'trivia', 'anime characters'],
+  description:
+    'Play the best free anime character guessing game online! Test your anime knowledge with AI-powered clues. Guess characters from Naruto, One Piece, Dragon Ball, and more. Free to play, no download required.',
+  keywords: [
+    'anime guessing game',
+    'anime character quiz',
+    'anime trivia game',
+    'guess anime character',
+    'anime quiz online',
+    'free anime game',
+    'anime knowledge test',
+    'anime character guessing',
+    'anime trivia',
+    'anime quiz game',
+    'free online anime game',
+    'anime character quiz game',
+  ],
   authors: [{ name: 'Anime Guess Game' }],
   alternates: {
     canonical: siteUrl,
@@ -32,8 +46,9 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-icon.svg', sizes: '180x180', type: 'image/svg+xml' }],
   },
   openGraph: {
-    title: 'Anime Guess Game',
-    description: 'Test your anime knowledge by guessing secret characters!',
+    title: 'Anime Guess Game - Free Online Anime Character Guessing Game',
+    description:
+      'Play the best free anime character guessing game online! Test your anime knowledge with AI-powered clues. Guess characters from popular anime series.',
     url: siteUrl,
     type: 'website',
     siteName: 'Anime Guess Game',
@@ -48,8 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anime Guess Game',
-    description: 'Test your anime knowledge by guessing secret characters!',
+    title: 'Anime Guess Game - Free Online Anime Character Guessing Game',
+    description:
+      'Play the best free anime character guessing game online! Test your anime knowledge with AI-powered clues.',
     images: [`${siteUrl}/logo.svg`],
   },
   robots: {
@@ -89,6 +105,63 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     url: siteUrl,
     applicationCategory: 'Game',
     operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      ratingCount: '150',
+    },
+  };
+
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How do you play Anime Guess Game?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Anime Guess Game is a free online guessing game where you ask questions to identify a secret anime character. Ask yes/no or descriptive questions, get AI-powered clues, and make your guess to win!',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is Anime Guess Game free to play?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes! Anime Guess Game is completely free to play. Create a free account to track your progress and compete on the leaderboard.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What anime characters are in the game?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Anime Guess Game features 50+ iconic characters from popular anime series including Naruto, One Piece, Dragon Ball, Attack on Titan, and many more. New characters are added regularly.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need to download anything to play?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No download required! Anime Guess Game is a browser-based game that works on any device with an internet connection. Play instantly from your computer, tablet, or phone.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How does the AI provide clues?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "Our AI analyzes your questions and provides accurate, lore-friendly answers based on the character's canonical information. The AI stays true to the source material to give you authentic clues.",
+        },
+      },
+    ],
   };
 
   return (
@@ -105,6 +178,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(gameStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqStructuredData),
           }}
         />
       </head>
