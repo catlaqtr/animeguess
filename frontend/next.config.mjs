@@ -59,6 +59,7 @@ const nextConfig = {
     NEXT_PUBLIC_SITE_URL: siteUrl,
     NEXT_PUBLIC_ADSENSE_PUBLISHER_ID: adsensePublisher,
     NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR: adsenseSidebarSlot,
+    NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
     NEXT_PUBLIC_APP_ENV:
       process.env.NEXT_PUBLIC_APP_ENV ||
       process.env.VERCEL_ENV ||

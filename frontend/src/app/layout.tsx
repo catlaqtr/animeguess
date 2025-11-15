@@ -13,6 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,12 +28,8 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: [
-      { url: '/apple-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/apple-icon.svg', sizes: '180x180', type: 'image/svg+xml' }],
   },
   openGraph: {
     title: 'Anime Guess Game',
@@ -59,11 +56,58 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  ...(googleSiteVerification && {
+    verification: {
+      google: googleSiteVerification,
+    },
+  }),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Anime Guess Game',
+    url: siteUrl,
+    description: 'Test your anime knowledge! Ask questions and guess the secret anime character.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteUrl}/game`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  const gameStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Game',
+    name: 'Anime Guess Game',
+    description:
+      'An interactive guessing game where players ask questions to identify anime characters.',
+    url: siteUrl,
+    applicationCategory: 'Game',
+    operatingSystem: 'Web Browser',
+  };
+
   return (
     <html lang="en">
+      <head>
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(gameStructuredData),
+          }}
+        />
+      </head>
       <body className={inter.className}>
         {adsenseClient ? (
           <Script
