@@ -39,7 +39,7 @@ cors:
 # SendGrid Configuration for Development (disabled by default)
 sendgrid:
   api-key: ${SENDGRID_API_KEY:}
-  from-email: ${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}
+  from-email: ${SENDGRID_FROM_EMAIL:info@animeguess.ca}
   from-name: ${SENDGRID_FROM_NAME:Anime Guess Game}
   enabled: ${SENDGRID_ENABLED:false}
 

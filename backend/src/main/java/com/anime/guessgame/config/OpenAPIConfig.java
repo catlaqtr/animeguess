@@ -21,7 +21,7 @@ public class OpenAPIConfig {
                         .description("Full-stack anime character guessing game with AI-powered responses")
                         .contact(new Contact()
                                 .name("API Support")
-                                .email("support@animeguessgame.com")))
+                                .email("support@animeguess.ca")))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components()
                         .addSecuritySchemes("Bearer Authentication",

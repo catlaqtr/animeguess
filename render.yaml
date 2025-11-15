@@ -46,9 +46,14 @@ services:
       - key: SENDGRID_API_KEY
         sync: false
       - key: SENDGRID_FROM_EMAIL
-        value: meteunal46@hotmail.com
+        value: info@animeguess.ca
       - key: SENDGRID_FROM_NAME
         value: Anime Guess Game
+      # Contact and Support email addresses (where you receive emails)
+      - key: SENDGRID_CONTACT_EMAIL
+        value: contact@animeguess.ca
+      - key: SENDGRID_SUPPORT_EMAIL
+        value: support@animeguess.ca
 
       # OAuth2 Configuration (set these in Render dashboard)
       - key: GOOGLE_CLIENT_ID

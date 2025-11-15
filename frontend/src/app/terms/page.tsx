@@ -89,8 +89,8 @@ export default function TermsPage() {
           We may suspend or terminate access if you violate these Terms or if we investigate
           suspected misconduct. You may delete your account at any time via the settings page or by
           contacting us at{' '}
-          <a className="text-purple-600 underline" href="mailto:support@animeguess.com">
-            support@animeguess.com
+          <a className="text-purple-600 underline" href="mailto:support@animeguess.ca">
+            support@animeguess.ca
           </a>
           .
         </p>

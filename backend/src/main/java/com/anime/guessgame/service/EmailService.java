@@ -42,6 +42,12 @@ public class EmailService {
     @Value("${app.frontend-url:https://your-frontend-url.vercel.app}")
     private String frontendUrl;
 
+    @Value("${sendgrid.contact-email:${sendgrid.from-email}}")
+    private String contactEmail;
+
+    @Value("${sendgrid.support-email:${sendgrid.from-email}}")
+    private String supportEmail;
+
     /**
      * Send welcome email to new user
      */
@@ -89,8 +95,8 @@ public class EmailService {
         String subject = "New Contact Form Submission - Anime Guess Game";
         String htmlContent = buildContactEmailHtml(fromName, fromEmail, message);
         
-        // Send to the configured from-email (your email where you receive contacts)
-        sendEmail(this.fromEmail, subject, htmlContent);
+        // Send to the configured contact email address
+        sendEmail(this.contactEmail, subject, htmlContent);
     }
 
     /**

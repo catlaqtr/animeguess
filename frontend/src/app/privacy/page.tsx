@@ -95,8 +95,8 @@ export default function PrivacyPolicyPage() {
         <p>
           Depending on your jurisdiction, you may have the right to access, correct, delete, or
           restrict processing of your personal data. Contact us at{' '}
-          <a className="text-purple-600 underline" href="mailto:support@animeguess.com">
-            support@animeguess.com
+          <a className="text-purple-600 underline" href="mailto:support@animeguess.ca">
+            support@animeguess.ca
           </a>{' '}
           to make a request. We will respond within 30 days.
         </p>

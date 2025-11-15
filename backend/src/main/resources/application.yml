@@ -48,8 +48,10 @@ spring:
 # SendGrid Email Configuration
 sendgrid:
   api-key: ${SENDGRID_API_KEY:}
-  from-email: ${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}
+  from-email: ${SENDGRID_FROM_EMAIL:info@animeguess.ca}
   from-name: ${SENDGRID_FROM_NAME:Anime Guess Game}
+  contact-email: ${SENDGRID_CONTACT_EMAIL:contact@animeguess.ca}
+  support-email: ${SENDGRID_SUPPORT_EMAIL:support@animeguess.ca}
   enabled: ${SENDGRID_ENABLED:false}
 
 # Security

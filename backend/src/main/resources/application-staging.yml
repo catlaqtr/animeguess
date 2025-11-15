@@ -19,7 +19,7 @@ cors:
 
 sendgrid:
   api-key: ${STAGING_SENDGRID_API_KEY:${SENDGRID_API_KEY:}}
-  from-email: ${STAGING_SENDGRID_FROM_EMAIL:${SENDGRID_FROM_EMAIL:meteunal46@hotmail.com}}
+  from-email: ${STAGING_SENDGRID_FROM_EMAIL:${SENDGRID_FROM_EMAIL:info@animeguess.ca}}
   from-name: ${STAGING_SENDGRID_FROM_NAME:${SENDGRID_FROM_NAME:Anime Guess Game}}
   enabled: ${STAGING_SENDGRID_ENABLED:true}
 

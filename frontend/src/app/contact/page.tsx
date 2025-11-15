@@ -10,17 +10,17 @@ const contactItems = [
   {
     title: 'Support',
     description: 'Account issues, password resets, bug reports.',
-    email: 'support@animeguess.com',
+    email: 'support@animeguess.ca',
   },
   {
-    title: 'Partnerships',
-    description: 'Sponsorships, content collaborations, licensing.',
-    email: 'partners@animeguess.com',
+    title: 'General Inquiries',
+    description: 'Questions, feedback, or general information.',
+    email: 'info@animeguess.ca',
   },
   {
-    title: 'Privacy & Legal',
-    description: 'Data requests, policy questions, legal inquiries.',
-    email: 'legal@animeguess.com',
+    title: 'Contact',
+    description: 'Direct contact for all inquiries.',
+    email: 'contact@animeguess.ca',
   },
 ];
 
