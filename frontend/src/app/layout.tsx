@@ -26,17 +26,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+    ],
+  },
   openGraph: {
     title: 'Anime Guess Game',
     description: 'Test your anime knowledge by guessing secret characters!',
     url: siteUrl,
     type: 'website',
     siteName: 'Anime Guess Game',
+    images: [
+      {
+        url: `${siteUrl}/logo.svg`,
+        width: 200,
+        height: 60,
+        alt: 'Anime Guess Game Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Anime Guess Game',
     description: 'Test your anime knowledge by guessing secret characters!',
+    images: [`${siteUrl}/logo.svg`],
   },
   robots: {
     index: true,

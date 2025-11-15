@@ -35,7 +35,13 @@ export default function MainNav() {
     <header className="border-b border-slate-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold text-purple-600">
-          <span aria-hidden="true">🎌</span>
+          <img 
+            src="/icon.svg" 
+            alt="Anime Guess Game Logo" 
+            className="h-8 w-8"
+            width="32"
+            height="32"
+          />
           <span>Anime Guess Game</span>
         </Link>
         <nav aria-label="Main navigation" className="flex flex-1 items-center justify-end gap-4">

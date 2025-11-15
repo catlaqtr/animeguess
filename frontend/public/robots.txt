@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 
-# Replace with your deployed frontend URL
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://animeguess.ca/sitemap.xml
 
