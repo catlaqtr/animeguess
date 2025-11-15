@@ -7,10 +7,10 @@ const adsenseSidebarSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR || '';
 
 const contentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.recaptcha.net https://*.sentry.io https://pagead2.googlesyndication.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.recaptcha.net https://*.sentry.io https://pagead2.googlesyndication.com https://static.cloudflareinsights.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' data: blob: https://www.google.com https://www.gstatic.com https://www.recaptcha.net https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net;
-  connect-src 'self' ${apiUrl} https://*.sentry.io https://*.ingest.us.sentry.io https://www.google.com https://www.recaptcha.net https://www.gstatic.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net;
+  connect-src 'self' ${apiUrl} https://*.sentry.io https://*.ingest.us.sentry.io https://www.google.com https://www.recaptcha.net https://www.gstatic.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://cloudflareinsights.com;
   font-src 'self' https://fonts.gstatic.com;
   frame-src https://www.google.com https://www.recaptcha.net https://googleads.g.doubleclick.net;
   frame-ancestors 'none';
