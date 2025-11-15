@@ -119,8 +119,8 @@ export default function TermsPage() {
         <h2 className="text-lg font-semibold text-slate-900">Contact</h2>
         <p className="mt-2">
           Questions about these Terms? Email{' '}
-          <a className="text-purple-600 underline" href="mailto:legal@animeguess.com">
-            legal@animeguess.com
+          <a className="text-purple-600 underline" href="mailto:support@animeguess.ca">
+            support@animeguess.ca
           </a>
           .
         </p>

@@ -30,7 +30,7 @@ public class EmailService {
     @Value("${sendgrid.api-key:}")
     private String apiKey;
 
-    @Value("${sendgrid.from-email:noreply@animeguessgame.com}")
+    @Value("${sendgrid.from-email:info@animeguess.ca}")
     private String fromEmail;
 
     @Value("${sendgrid.from-name:Anime Guess Game}")

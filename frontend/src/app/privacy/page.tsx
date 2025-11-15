@@ -123,8 +123,8 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-lg font-semibold text-slate-900">Questions?</h2>
         <p className="mt-2">
           Contact our privacy team at{' '}
-          <a className="text-purple-600 underline" href="mailto:privacy@animeguess.com">
-            privacy@animeguess.com
+          <a className="text-purple-600 underline" href="mailto:support@animeguess.ca">
+            support@animeguess.ca
           </a>{' '}
           or use the form on our{' '}
           <Link className="underline" href="/contact">
